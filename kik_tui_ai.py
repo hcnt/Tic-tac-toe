@@ -1,6 +1,11 @@
 from kik_plansza import *
 from kik_kom import *
 from kik_ai_los import *
+import os
+
+
+def cls():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def wyswietl_plansze(plansza):
@@ -24,6 +29,7 @@ def partia(tryb, symbol_gracza, zaczynajacySymbol):
     gracz = zaczynajacySymbol
     wygrany_gracz = 0
     while(not czy_gra_skonczona):
+        print()
         wyswietl_plansze(plansza)
         if(tryb == 0 or (tryb == 1 and gracz == symbol_gracza)):
             print(kom_ruch(gracz))
@@ -68,6 +74,7 @@ def gra():
         zaczynajacySymbol = -1
 
     while(graj):
+        cls()
         partia(tryb, gracz1, zaczynajacySymbol)
         x = input("Czy chcesz zagrać jeszcze raz? y/n: ")
         zaczynajacySymbol = zamienZaczynajacySymbol(zaczynajacySymbol)
