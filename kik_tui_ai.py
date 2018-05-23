@@ -4,10 +4,6 @@ from kik_ai_los import *
 import os
 
 
-def cls():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-
 def wyswietl_plansze(plansza):
     print("-------------------")
     for i in range(len(plansza)):
@@ -33,8 +29,8 @@ def partia(tryb, symbol_gracza, zaczynajacySymbol):
         wyswietl_plansze(plansza)
         if(tryb == 0 or (tryb == 1 and gracz == symbol_gracza)):
             print(kom_ruch(gracz))
-            wiersz = int(input("podaj wiersz: "))
             kolumna = int(input("podaj kolumne: "))
+            wiersz = int(input("podaj wiersz: "))
         else:
             wiersz, kolumna = wybierz_ruch(plansza, gracz)
             print(kom_ruch_przeciw(gracz, wiersz, kolumna))
@@ -48,6 +44,7 @@ def partia(tryb, symbol_gracza, zaczynajacySymbol):
         czy_gra_skonczona, wygrany_gracz = koniec_gry(plansza)
     wyswietl_plansze(plansza)
     print(kom_koniec(wygrany_gracz))
+    return(wygrany_gracz)
 
 
 def zamienZaczynajacySymbol(symbol):
@@ -58,6 +55,14 @@ def zamienZaczynajacySymbol(symbol):
 
 
 def gra():
+    gracz1 = 0
+
+    wygrany = 0
+    punkty = [0, 0, 0]
+
+    numer_partii = 0
+    ile_partii = 0
+
     graj = True
     print("tryb 0 - człowiek vs człowiek")
     print("tryb 1 - człowiek vs komputer")
@@ -73,13 +78,21 @@ def gra():
     else:
         zaczynajacySymbol = -1
 
-    while(graj):
-        cls()
-        partia(tryb, gracz1, zaczynajacySymbol)
-        x = input("Czy chcesz zagrać jeszcze raz? y/n: ")
+    print()
+    ile_partii = int(input("Ile partii chcesz zagrać? "))
+
+    while(numer_partii < ile_partii):
+        numer_partii += 1
+        print()
+        print("Partia: " + str(numer_partii))
+        wygrany = partia(tryb, gracz1, zaczynajacySymbol)
+        punkty[wygrany] += 1
+        print()
+        print("Liczba partii: " + str(numer_partii))
+        print("Zwycięstwa X: " + str(punkty[2]))
+        print("Zwycięstwa 0: " + str(punkty[1]))
+        print("Remisy: " + str(punkty[0]))
         zaczynajacySymbol = zamienZaczynajacySymbol(zaczynajacySymbol)
-        if(x != "y" and x != "Y"):
-            graj = False
 
 
 gra()
