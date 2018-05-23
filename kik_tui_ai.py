@@ -47,18 +47,11 @@ def partia(tryb, symbol_gracza, zaczynajacySymbol):
     return(wygrany_gracz)
 
 
-def zamienZaczynajacySymbol(symbol):
-    if(symbol == -1):
-        return 1
-    else:
-        return -1
-
-
 def gra():
     gracz1 = 0
 
     wygrany = 0
-    punkty = [0,0,0]
+    punkty = [0, 0, 0]
 
     numer_partii = 0
     ile_partii = 0
@@ -81,19 +74,17 @@ def gra():
     print()
     ile_partii = int(input("Ile partii chcesz zagrać? "))
 
-
     while(numer_partii < ile_partii):
-        numer_partii+=1
+        numer_partii += 1
         print()
         print("Partia: " + str(numer_partii))
         wygrany = partia(tryb, gracz1, zaczynajacySymbol)
         punkty[wygrany] += 1
         print()
-        print("Zwycięstwa X: "+ str(punkty[2]))
-        print("Zwycięstwa 0: "+ str(punkty[1]))
+        print("Zwycięstwa X: " + str(punkty[2]))
+        print("Zwycięstwa 0: " + str(punkty[1]))
         print("Remisy: " + str(punkty[0]))
-        zaczynajacySymbol = zamienZaczynajacySymbol(zaczynajacySymbol)
-        
+        zaczynajacySymbol *= -1
 
 
 gra()
