@@ -1,6 +1,7 @@
 from kik_plansza import *
 from kik_kom import *
-from kik_ai import *
+import kik_ai
+import kik_ai_los
 import os
 
 
@@ -19,8 +20,8 @@ def wyswietl_plansze(plansza):
 
 def partia(tryb, symbol_gracza, zaczynajacySymbol):
 
-    dna = [[9, 9], [15, 11], [11, 17], [20, 2], [11, 4],
-           [7, 5], [10, 5], [3, 0], [2, 11], [7, 3]]
+    dna = [[9.192329406738281, 8.324653625488281], [9.721359252929688, 7.469078063964844], [9.496025085449219, 9.840873718261719], [9.514266967773438, 11.944732666015625], [8.434219360351562, 13.248138427734375], [
+        8.639129638671875, 11.634796142578125], [7.7268218994140625, 11.596717834472656], [10.829757690429688, 10.24554443359375], [14.114982604980469, 11.238487243652344], [9.053512573242188, 11.372337341308594]]
     plansza = nowa_pusta_plansza()
     czy_ruch_wykonany = False
     czy_gra_skonczona = False
@@ -30,11 +31,14 @@ def partia(tryb, symbol_gracza, zaczynajacySymbol):
         print()
         wyswietl_plansze(plansza)
         if(tryb == 0 or (tryb == 1 and gracz == symbol_gracza)):
-            print(kom_ruch(gracz))
-            kolumna = int(input("podaj kolumne: "))
-            wiersz = int(input("podaj wiersz: "))
+            # print(kom_ruch(gracz))
+            # kolumna = int(input("podaj kolumne: "))
+            # wiersz = int(input("podaj wiersz: "))
+            wiersz, kolumna = kik_ai_los.wybierzRuch(plansza, gracz)
+            print(kom_ruch_przeciw(gracz, wiersz, kolumna))
+
         else:
-            wiersz, kolumna = wybierzRuch(plansza, gracz, dna)
+            wiersz, kolumna = kik_ai.wybierzRuch(plansza, gracz, dna)
             print(kom_ruch_przeciw(gracz, wiersz, kolumna))
 
         czy_ruch_wykonany, plansza, gracz = wykonaj_ruch(
