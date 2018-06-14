@@ -28,6 +28,8 @@ class Window:
         if self._whole_gui == None:
             self._whole_gui = Tkinter.Tk()
             self._whole_gui.withdraw()
+            
+        
         self.root = Tkinter.Toplevel(self._whole_gui)
         self.root.protocol('WM_DELETE_WINDOW', self.close)
         self.root.title(title)
@@ -43,6 +45,7 @@ class Window:
         self._last_id += 1
         self.my_id = self._last_id
         self._windows[self.my_id] = self.root
+
     def _ix_expand_array(self, arr, ind, stuff):
         while ind >=len (arr):
             arr.append(stuff)
@@ -131,6 +134,7 @@ class Window:
         self.cont[name].insert(0, value)
 
 ix_app = Window
+
 
 ##def Array(*dims, **stuff_def):
 ##    stuffing = stuff_def.get("stuffing")
